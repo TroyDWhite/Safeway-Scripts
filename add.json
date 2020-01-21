@@ -1,0 +1,146 @@
+{
+  "Name": "Safeway-Dollar",
+  "CreationDate": "2020-1-20",
+  "Commands": [
+    {
+      "Command": "store",
+      "Target": "true",
+      "Value": "!ErrorIgnore"
+    },
+    {
+      "Command": "comment",
+      "Target": "",
+      "Value": "Sometimes Albertson's server is slow, so adjust replay speed to 'slow' to compensate"
+    },
+    {
+      "Command": "store",
+      "Target": "slow",
+      "Value": "!ReplaySpeed"
+    },
+    {
+      "Command": "store",
+      "Target": "5",
+      "Value": "!TIMEOUT_WAIT"
+    },
+    {
+      "Command": "open",
+      "Target": "https://www.safeway.com/account/sign-in.html",
+      "Value": ""
+    },
+    {
+      "Command": "waitForPageToLoad",
+      "Target": "",
+      "Value": ""
+    },
+    {
+      "Command": "pause",
+      "Target": "3000",
+      "Value": ""
+    },
+    {
+      "Command": "type",
+      "Target": "id=label-email",
+      "Value": "your.email${!LOOP}@your-domain.com"
+    },
+    {
+      "Command": "type",
+      "Target": "id=label-password",
+      "Value": "your-password"
+    },
+    {
+      "Command": "clickAndWait",
+      "Target": "id=btnSignIn",
+      "Value": ""
+    },
+    {
+      "Command": "pause",
+      "Target": "3000",
+      "Value": ""
+    },
+    {
+      "Command": "open",
+      "Target": "https://www.safeway.com/justforu/coupons-deals.html?q=limit%201%20item.&zipcode=[your.zipcode]",
+      "Value": ""
+    },
+    {
+      "Command": "waitForPageToLoad",
+      "Target": "",
+      "Value": ""
+    },
+    {
+      "Command": "pause",
+      "Target": "3000",
+      "Value": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${!Loop}",
+      "Value": "!csvLine"
+    },
+    {
+      "Command": "verifyText",
+      "Target": "//*[text()[contains(.,'Special Offer $1.00 OFF')]]",
+      "Value": "Special Offer $1.00 OFF"
+    },
+    {
+      "Command": "if_v2",
+      "Target": "${!LastCommandOK}",
+      "Value": ""
+    },
+    {
+      "Command": "store",
+      "Target": "Yes",
+      "Value": "!csvLine"
+    },
+    {
+      "Command": "click",
+      "Target": "//*[contains(@id,'couponAdd')]",
+      "Value": ""
+    },
+    {
+      "Command": "click",
+      "Target": "//*[contains(@id,'couponAdd')]",
+      "Value": ""
+    },
+    {
+      "Command": "click",
+      "Target": "//*[contains(@id,'couponAdd')]",
+      "Value": ""
+    },
+    {
+      "Command": "pause",
+      "Target": "2000",
+      "Value": ""
+    },
+    {
+      "Command": "end",
+      "Target": "",
+      "Value": ""
+    },
+    {
+      "Command": "csvSave",
+      "Target": "safeway-dollar.csv",
+      "Value": ""
+    },
+    {
+      "Command": "pause",
+      "Target": "3000",
+      "Value": ""
+    },
+    {
+      "Command": "clickAndWait",
+      "Target": "link=Sign Out",
+      "Value": ""
+    },
+    {
+      "Command": "comment",
+      "Target": "",
+      "Value": "Needed to add a \"pause\"at end or else the browser wouldn’t sign out and would continue looping to the previous login ID."
+    },
+    {
+      "Command": "pause",
+      "Target": "5000",
+      "Value": ""
+    }
+  ]
+}
