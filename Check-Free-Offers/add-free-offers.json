@@ -1,0 +1,126 @@
+{
+  "Name": "Safeway-Free",
+  "CreationDate": "2020-1-20",
+  "Commands": [
+    {
+      "Command": "store",
+      "Target": "true",
+      "Value": "!ErrorIgnore"
+    },
+    {
+      "Command": "comment",
+      "Target": "",
+      "Value": "Sometimes Albertson's server is slow, so adjust replay speed to 'slow' to compensate"
+    },
+    {
+      "Command": "store",
+      "Target": "slow",
+      "Value": "!ReplaySpeed"
+    },
+    {
+      "Command": "store",
+      "Target": "${!LOOP}",
+      "Value": "!csvLine"
+    },
+    {
+      "Command": "store",
+      "Target": "5",
+      "Value": "!TIMEOUT_WAIT"
+    },
+    {
+      "Command": "open",
+      "Target": "https://www.safeway.com/account/sign-in.html",
+      "Value": ""
+    },
+    {
+      "Command": "waitForPageToLoad",
+      "Target": "10000",
+      "Value": ""
+    },
+    {
+      "Command": "type",
+      "Target": "id=label-email",
+      "Value": "your.email${!LOOP}@your-domain.com"
+    },
+    {
+      "Command": "type",
+      "Target": "id=label-password",
+      "Value": "your-password"
+    },
+    {
+      "Command": "click",
+      "Target": "id=btnSignIn",
+      "Value": ""
+    },
+    {
+      "Command": "pause",
+      "Target": "3000",
+      "Value": ""
+    },
+    {
+      "Command": "open",
+      "Target": "https://www.safeway.com/justforu/coupons-deals.html?r=https%3A%2F%2Fwww.safeway.com%2Fhome.html&event=FREE%20Offers",
+      "Value": ""
+    },
+    {
+      "Command": "waitForPageToLoad",
+      "Target": "10000",
+      "Value": ""
+    },
+    {
+      "Command": "verifyText",
+      "Target": "//*[text()[contains(.,'Special Offer FREE')]]",
+      "Value": "Special Offer FREE"
+    },
+    {
+      "Command": "if_v2",
+      "Target": "${!LastCommandOK}",
+      "Value": ""
+    },
+    {
+      "Command": "click",
+      "Target": "//*[contains(@id,'couponAdd')]",
+      "Value": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "//span[@class='grid-coupon-description-text-title']",
+      "Value": "!csvLine"
+    },
+    {
+      "Command": "storeText",
+      "Target": "//div[@class='grid-coupon-description-text-details']",
+      "Value": "!csvLine"
+    },
+    {
+      "Command": "end",
+      "Target": "",
+      "Value": ""
+    },
+    {
+      "Command": "csvSave",
+      "Target": "safeway-free-offers.csv",
+      "Value": ""
+    },
+    {
+      "Command": "pause",
+      "Target": "1000",
+      "Value": ""
+    },
+    {
+      "Command": "clickAndWait",
+      "Target": "link=Sign Out",
+      "Value": ""
+    },
+    {
+      "Command": "comment",
+      "Target": "",
+      "Value": "Needed to add a \"pause\"at end or else the browser wouldn’t sign out and would continue looping to the previous login ID."
+    },
+    {
+      "Command": "pause",
+      "Target": "1000",
+      "Value": ""
+    }
+  ]
+}
